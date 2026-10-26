@@ -7,11 +7,11 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs, quote
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-HOST = "127.0.0.1"
-PORT = 8080
+HOST = os.environ.get("CLOUD_HOST", "127.0.0.1")
+PORT = int(os.environ.get("CLOUD_PORT", "8080"))
 
 # On your Mac, this is the local test storage.
-STORAGE = Path.home() / "personal-cloud-data"
+STORAGE = Path(os.environ.get("CLOUD_STORAGE",str(Path.home() / "personal-cloud-data")))
 
 # Set these through environment variables before starting.
 USERNAME = os.environ.get("CLOUD_USER", "admin")
