@@ -352,9 +352,12 @@ async function uploadFile() {{
                     output.write(chunk)
                     remaining -= len(chunk)
 
-            # Atomically create the final filename without overwriting.
-            os.link(temporary, destination)
-            temporary.unlink()
+            # Move the uploaded file to its final destination.
+            if destination.exists():
+                self.send_error(409, "File already exists")
+                return
+
+            temporary.replace(destination)
             temporary = None
 
             self.respond(201, "Upload successful")
