@@ -360,7 +360,7 @@ async function uploadFile() {{
                             chunk = source.read(1024 * 1024)
                             if not chunk:
                                 break
-                        output.write(chunk)
+                            output.write(chunk)
 
             except FileExistsError:
                 self.respond(409, "A file with that name already exists")
@@ -375,7 +375,6 @@ async function uploadFile() {{
 
             temporary.unlink()
             temporary = None
-
             self.respond(201, "Upload successful")
 
         except FileExistsError:
