@@ -353,25 +353,13 @@ async function uploadFile() {{
                     remaining -= len(chunk)
 
             # Create the destination exclusively to prevent overwrites.
-            try:
-                with open(destination, "xb") as output:
-                    with open(temporary, "rb") as source:
-                        while True:
-                            chunk = source.read(1024 * 1024)
-                            if not chunk:
-                                break
-                            output.write(chunk)
-
-            except FileExistsError:
-                self.respond(409, "A file with that name already exists")
-                return
-
-            except OSError:
-                try:
-                    destination.unlink(missing_ok=True)
-                except OSError:
-                    pass
-                raise
+            with destination.open("xb") as output:
+                with temporary.open("rb") as source:
+                    while True:
+                        chunk = source.read(65536)
+                        if not chunk:
+                            break
+                        output.write(chunk)
 
             temporary.unlink()
             temporary = None
