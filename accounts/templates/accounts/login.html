@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Personal Cloud</title>
+
+    <link rel="stylesheet"
+          href="{% static 'accounts/css/auth.css' %}">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="brand">
+            <div class="brand-logo">P</div>
+            <h1>Personal Cloud</h1>
+            <p>YOUR PRIVATE SPACE</p>
+        </div>
+
+        <h2 class="auth-title">Welcome back</h2>
+        <p class="auth-subtitle">Sign in to access your files.</p>
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <div class="auth-footer">
+            Don't have an account?
+            <a href="{% url 'register' %}">Create account</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

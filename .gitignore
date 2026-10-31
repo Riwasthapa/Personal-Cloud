@@ -1,8 +1,25 @@
-.venv/
+# Python
 __pycache__/
 *.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# Django database
+db.sqlite3
+db.sqlite3.backup
+
+# User uploaded files
+media/
+
+# Environment variables
 .env
-.env.*
-!.env.example
-personal-cloud-data/
-cloud-storage/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

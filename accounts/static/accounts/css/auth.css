@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #0B0D12;
+    color: #F3F5FA;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 430px;
+    background: #141821;
+    border: 1px solid #252B38;
+    border-radius: 18px;
+    padding: 36px;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    background: #8B9DFF;
+    color: #0B0D12;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 auto 14px;
+}
+
+.brand h1 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.brand p {
+    color: #929AAA;
+    font-size: 13px;
+}
+
+.auth-title {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    color: #929AAA;
+    font-size: 14px;
+    margin-bottom: 26px;
+}
+
+.auth-form p {
+    margin-bottom: 18px;
+}
+
+.auth-form label {
+    display: block;
+    color: #C5CAD5;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 13px;
+    background: #0B0D12;
+    border: 1px solid #303747;
+    border-radius: 9px;
+    color: #F3F5FA;
+    font-size: 14px;
+    outline: none;
+}
+
+.auth-form input:focus {
+    border-color: #8B9DFF;
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 14px;
+    background: #8B9DFF;
+    color: #0B0D12;
+    border: none;
+    border-radius: 9px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.auth-form button:hover {
+    background: #A5B2FF;
+}
+
+.auth-footer {
+    text-align: center;
+    color: #929AAA;
+    font-size: 14px;
+    margin-top: 24px;
+}
+
+.auth-footer a {
+    color: #8B9DFF;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.errorlist {
+    color: #FF7777;
+    font-size: 13px;
+    list-style: none;
+    margin-top: 6px;
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 26px 20px;
+    }
+}
