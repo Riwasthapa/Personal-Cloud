@@ -1,0 +1,319 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --background: #0d0f17;
+    --sidebar: #11141e;
+    --surface: #171b28;
+    --border: #292e40;
+    --primary: #8878ff;
+    --primary-hover: #9a8dff;
+    --text: #f1f1f7;
+    --muted: #9298ab;
+    --danger: #ff737d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.upload-page {
+    min-height: 100vh;
+}
+
+
+/* HEADER */
+
+.topbar {
+    height: 82px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--sidebar);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: var(--primary);
+    border-radius: 12px;
+    color: white;
+    font-size: 23px;
+}
+
+.brand-highlight {
+    color: var(--primary);
+}
+
+.back-link {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.back-link:hover {
+    color: var(--primary-hover);
+}
+
+.back-link span {
+    margin-right: 7px;
+    font-size: 17px;
+}
+
+
+/* MAIN */
+
+.upload-main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 75px 25px 35px;
+}
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.eyebrow {
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+}
+
+.page-heading h1 {
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: -1.3px;
+}
+
+.page-heading h1 span {
+    color: var(--primary);
+}
+
+.page-heading > p:last-child {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+
+/* UPLOAD CARD */
+
+.upload-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 42px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.upload-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 22px;
+    border-radius: 18px;
+    background: rgba(136, 120, 255, 0.13);
+    color: var(--primary-hover);
+    display: grid;
+    place-items: center;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.upload-card h2 {
+    font-size: 19px;
+    margin-bottom: 9px;
+}
+
+.upload-description {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 32px;
+}
+
+
+/* FORM */
+
+.upload-form {
+    text-align: left;
+}
+
+.file-field {
+    margin-bottom: 24px;
+}
+
+.file-field label {
+    display: block;
+    color: #d9d9e6;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 11px;
+}
+
+.file-input-wrapper input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background: #111522;
+    border: 1px dashed #45405f;
+    border-radius: 12px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.file-input-wrapper input[type="file"]:hover {
+    border-color: var(--primary);
+    background: #17172a;
+}
+
+.file-input-wrapper input[type="file"]::file-selector-button {
+    background: #30294f;
+    color: #c3baff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    margin-right: 14px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.form-errors,
+.field-errors {
+    color: var(--danger);
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+
+/* BUTTON */
+
+.submit-button {
+    width: 100%;
+    min-height: 48px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: white;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.submit-button:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.submit-button span {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+
+/* SECURITY NOTE */
+
+.upload-note {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.upload-note span {
+    margin-right: 6px;
+}
+
+
+/* FOOTER */
+
+.page-footer {
+    text-align: center;
+    color: #686f84;
+    font-size: 10px;
+    margin-top: 35px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .topbar {
+        height: 70px;
+        padding: 0 18px;
+    }
+
+    .brand {
+        font-size: 16px;
+    }
+
+    .brand-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .back-link {
+        font-size: 10px;
+    }
+
+    .upload-main {
+        padding: 55px 16px 25px;
+    }
+
+    .page-heading h1 {
+        font-size: 28px;
+    }
+
+    .page-heading > p:last-child {
+        font-size: 11px;
+    }
+
+    .upload-card {
+        padding: 30px 20px;
+    }
+
+    .upload-card h2 {
+        font-size: 17px;
+    }
+
+}

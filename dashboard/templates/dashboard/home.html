@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -5,35 +6,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Cloud</title>
+    <title>Personal Cloud | My Files</title>
 
     <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}">
 </head>
 
 <body>
-    <h1>Personal Cloud</h1>
-    <p>Your private cloud storage.</p>
 
-    <a href="{% url 'upload_file' %}">Upload File</a>
+<div class="app-layout">
 
-    <h2>My Files</h2>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-    {% if files %}
-        <ul>
-            {% for file in files %}
-                <li>{{ file.original_name }}— {{ file.file_size }} bytes<a href="{% url 'download_file' file.id %}">Download</a></li>
-                <form method="POST" action="{% url 'delete_file' file.id %}" style="display: inline;">{% csrf_token %}
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this file?');">Delete</button>
-                </form>
-            {% endfor %}
-        </ul>   
-    {% else %}
-        <p>You haven't uploaded any files yet.</p>
-    {% endif %}
+        <a href="{% url 'home' %}" class="brand">
+            <div class="brand-icon">☁</div>
+            <span>Personal<span class="brand-highlight">Cloud</span></span>
+        </a>
 
-    <form method="POST" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">Logout</button>
-</form>
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav">
+            <a href="{% url 'home' %}" class="nav-link active">
+                <span>▦</span> My Files
+            </a>
+
+            <a href="{% url 'upload_file' %}" class="nav-link">
+                <span>↑</span> Upload Files
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-label">ACCOUNT</div>
+
+            <div class="user-card">
+                <div class="avatar">
+                    {{ request.user.first_name|first|upper|default:"U" }}
+                </div>
+
+                <div class="user-info">
+                    <strong>{{ request.user.get_full_name|default:request.user.email }}</strong>
+                    <span>Personal account</span>
+                </div>
+            </div>
+
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    <span>↪</span> Sign out
+                </button>
+            </form>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <span class="breadcrumb">Workspace /</span>
+                <strong>My Files</strong>
+            </div>
+
+            <a href="{% url 'upload_file' %}" class="upload-button">
+                <span>+</span> Upload files
+            </a>
+        </header>
+
+
+        <section class="page-content">
+
+            <div class="welcome-section">
+                <div>
+                    <p class="eyebrow">YOUR PERSONAL SPACE</p>
+
+                    <h1>My Files<span class="heading-dot">.</span></h1>
+
+                    <p class="welcome-description">
+                        Everything you store, all in one place.
+                    </p>
+                </div>
+
+                <div class="file-count">
+                    <span class="count-number">{{ files|length }}</span>
+                    <span class="count-label">Total files</span>
+                </div>
+            </div>
+
+
+            <!-- STORAGE SUMMARY -->
+            <section class="storage-card">
+
+                <div class="storage-icon">☁</div>
+
+                <div class="storage-details">
+                    <h3>Your private cloud</h3>
+                    <p>Your files are stored in your personal storage.</p>
+                </div>
+
+                <a href="{% url 'upload_file' %}" class="storage-action">
+                    Add files <span>→</span>
+                </a>
+
+            </section>
+
+
+            <!-- FILE LIST -->
+            <section class="files-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>All files</h2>
+                        <p>Manage your uploaded documents and files.</p>
+                    </div>
+                </div>
+
+
+                {% if files %}
+
+                    <div class="file-list">
+
+                        {% for file in files %}
+
+                            <div class="file-row">
+
+                                <div class="file-icon">
+                                    {% with filename=file.original_name|lower %}
+                                        {% if ".pdf" in filename %}
+                                            <span class="pdf-icon">PDF</span>
+                                        {% elif ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".webp" in filename %}
+                                            <span class="image-icon">IMG</span>
+                                        {% elif ".zip" in filename or ".rar" in filename %}
+                                            <span class="zip-icon">ZIP</span>
+                                        {% elif ".doc" in filename %}
+                                            <span class="doc-icon">DOC</span>
+                                        {% else %}
+                                            <span class="generic-icon">FILE</span>
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+
+                                <div class="file-details">
+                                    <strong>{{ file.original_name }}</strong>
+                                    <span>{{ file.file_size|filesizeformat }}</span>
+                                </div>
+
+                                <div class="file-date">
+                                    {{ file.uploaded_at|date:"d M Y" }}
+                                </div>
+
+                                <div class="file-actions">
+
+                                    <a href="{% url 'download_file' file.id %}"
+                                       class="action-button download-action"
+                                       title="Download">
+                                        ↓
+                                    </a>
+
+                                    <form method="POST"
+                                          action="{% url 'delete_file' file.id %}"
+                                          onsubmit="return confirm('Are you sure you want to delete this file?');">
+                                        {% csrf_token %}
+
+                                        <button type="submit"
+                                                class="action-button delete-action"
+                                                title="Delete">
+                                            ×
+                                        </button>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">☁</div>
+
+                        <h3>Your cloud is empty</h3>
+
+                        <p>
+                            You haven't uploaded any files yet.
+                            Start by adding your first file.
+                        </p>
+
+                        <a href="{% url 'upload_file' %}" class="upload-button">
+                            + Upload your first file
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+            <footer class="footer">
+                <span>Personal Cloud</span>
+                <span>Your files. Your space. Your control.</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
 </body>
 </html>

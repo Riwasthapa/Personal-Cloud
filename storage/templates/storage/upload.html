@@ -1,21 +1,106 @@
+
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Upload File - Personal Cloud</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Files | Personal Cloud</title>
+
+    <link rel="stylesheet" href="{% static 'storage/css/upload.css' %}">
 </head>
+
 <body>
 
-    <h1>Upload a File</h1>
+<div class="upload-page">
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <header class="topbar">
+        <a href="{% url 'home' %}" class="brand">
+            <span class="brand-icon">☁</span>
+            <span>Personal<span class="brand-highlight">Cloud</span></span>
+        </a>
 
-        {{ form.as_p }}
+        <a href="{% url 'home' %}" class="back-link">
+            <span>←</span> Back to Dashboard
+        </a>
+    </header>
 
-        <button type="submit">Upload</button>
-    </form>
 
-    <a href="{% url 'home' %}">Back to Dashboard</a>
+    <main class="upload-main">
+
+        <div class="page-heading">
+            <p class="eyebrow">YOUR PERSONAL SPACE</p>
+            <h1>Upload your files<span>.</span></h1>
+            <p>Select a file from your device and add it to your personal cloud.</p>
+        </div>
+
+
+        <section class="upload-card">
+
+            <div class="upload-icon">↑</div>
+
+            <h2>Choose a file to upload</h2>
+
+            <p class="upload-description">
+                Select a file from your computer or mobile device.
+            </p>
+
+
+            <form method="POST"
+                  enctype="multipart/form-data"
+                  class="upload-form">
+
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                {% for field in form %}
+                    <div class="file-field">
+
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                        </label>
+
+                        <div class="file-input-wrapper">
+                            {{ field }}
+                        </div>
+
+                        {% if field.errors %}
+                            <div class="field-errors">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="submit-button">
+                    <span>↑</span> Upload to Personal Cloud
+                </button>
+
+            </form>
+
+            <div class="upload-note">
+                <span>🔒</span>
+                Your files are associated with your personal account.
+            </div>
+
+        </section>
+
+
+        <footer class="page-footer">
+            Personal Cloud · Your files. Your space. Your control.
+        </footer>
+
+    </main>
+
+</div>
 
 </body>
 </html>
