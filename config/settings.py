@@ -26,11 +26,18 @@ load_dotenv(BASE_DIR / '.env')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG','False').lower() == 'true'
 
-ALLOWED_HOSTS = [
+ALLOWED_HOST = [
+    '127.0.0.1',
+    'localhost',
     '192.168.1.6',
     '100.70.81.18',
+    *[
+        host.strip()
+        for host in os.getenv('ALLOWED_HOST', '').split(',')
+        if host.strip()
+    ],
 ]
 
 
