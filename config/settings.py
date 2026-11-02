@@ -129,7 +129,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
-ANDROID_MEDIA_ROOT = Path('/storage/emulated/0/Pictures/Personal Cloud')
+ANDROID_MEDIA_ROOT = Path('/storage/emulated/0/Pictures/Gallery/owner/Personal Cloud')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
