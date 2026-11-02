@@ -4,7 +4,9 @@ from .forms import FileUploadForm, File
 from django.shortcuts import get_object_or_404
 from django.http import FileResponse
 from django.views.decorators.http import require_POST
-
+import shutil
+from pathlib import Path
+from django.config import settings
 
 @login_required
 def upload_file(request):
@@ -24,6 +26,11 @@ def upload_file(request):
 
             uploaded_file.save()
 
+	    source_path = Path(uploaded_file.file.path)
+	    destination_dir = settings.ANDROID_MEDIA_ROOT
+	    destination_dir = mkdir(parents=True, exists_ok= True)
+	    destination_path = destination_dir / uploaded_file.original_name
+	    shutil.copy2(source_path,destination_path)
             return redirect('home')
 
     else:
