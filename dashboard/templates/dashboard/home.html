@@ -120,12 +120,18 @@
                         <h2>All files</h2>
                         <p>Manage your uploaded documents and files.</p>
                     </div>
+                    {% if files %}
+                        <div class="view-toggle">
+                            <button type="button" id="listViewBtn" class="view-btn" title="List view" aria-label="List view" aria-pressed="true">☰</button>
+                            <button type="button" id="gridViewBtn" class="view-btn" title="Grid view" aria-label="Grid view" aria-pressed="false">▦</button>
+                        </div>
+                    {% endif %}
                 </div>
 
 
                 {% if files %}
 
-                    <div class="file-list">
+                    <div class="file-list list-view" id="fileList">
 
                         {% for file in files %}
 
@@ -133,10 +139,14 @@
 
                                 <div class="file-icon">
                                     {% with filename=file.original_name|lower %}
-                                        {% if ".pdf" in filename %}
+                                        {% if ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".webp" in filename or ".gif" in filename %}
+                                            <img
+                                                src="{{ file.file.url }}"
+                                                alt="{{ file.original_name }}"
+                                                class="file-thumbnail"
+                                            >
+                                        {% elif ".pdf" in filename %}
                                             <span class="pdf-icon">PDF</span>
-                                        {% elif ".jpg" in filename or ".jpeg" in filename or ".png" in filename or ".webp" in filename %}
-                                            <span class="image-icon">IMG</span>
                                         {% elif ".zip" in filename or ".rar" in filename %}
                                             <span class="zip-icon">ZIP</span>
                                         {% elif ".doc" in filename %}
@@ -218,5 +228,29 @@
 
 </div>
 
+    {% if files %}
+        <script>
+            const fileList = document.getElementById("fileList");
+            const listBtn = document.getElementById("listViewBtn");
+            const gridBtn = document.getElementById("gridViewBtn");
+
+            function setView(view) {
+                fileList.classList.remove("list-view", "grid-view");
+                fileList.classList.add(`${view}-view`);
+
+                listBtn.classList.toggle("active", view === "list");
+                gridBtn.classList.toggle("active", view === "grid");
+                listBtn.setAttribute("aria-pressed", String(view === "list"));
+                gridBtn.setAttribute("aria-pressed", String(view === "grid"));
+
+                localStorage.setItem("cloudView", view);
+            }
+
+            listBtn.addEventListener("click", () => setView("list"));
+            gridBtn.addEventListener("click", () => setView("grid"));
+
+            setView(localStorage.getItem("cloudView") === "grid" ? "grid" : "list");
+        </script>
+    {% endif %}
 </body>
 </html>
