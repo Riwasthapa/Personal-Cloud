@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --background: #0d0f17;
-    --sidebar: #11141e;
-    --surface: #171b28;
-    --border: #292e40;
-    --primary: #8878ff;
-    --primary-hover: #9a8dff;
-    --text: #f1f1f7;
-    --muted: #9298ab;
-    --danger: #ff737d;
+    --background: #f4f6ff;
+    --sidebar: #ffffff;
+    --surface: #ffffff;
+    --border: #e4e7f3;
+    --primary: #7047eb;
+    --primary-hover: #865ff5;
+    --text: #25243b;
+    --muted: #727792;
+    --danger: #e34f70;
 }
 
 * {
@@ -62,7 +62,7 @@ a {
     height: 38px;
     display: grid;
     place-items: center;
-    background: var(--primary);
+    background: linear-gradient(135deg, #7047eb, #a149e8);
     border-radius: 12px;
     color: white;
     font-size: 23px;
@@ -136,7 +136,7 @@ a {
     border-radius: 18px;
     padding: 42px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 20px 60px rgba(63, 54, 117, 0.12);
 }
 
 .upload-icon {
@@ -144,8 +144,8 @@ a {
     height: 65px;
     margin: 0 auto 22px;
     border-radius: 18px;
-    background: rgba(136, 120, 255, 0.13);
-    color: var(--primary-hover);
+    background: linear-gradient(135deg, #eee8ff, #ddf6ff);
+    color: var(--primary);
     display: grid;
     place-items: center;
     font-size: 35px;
@@ -176,7 +176,7 @@ a {
 
 .file-field label {
     display: block;
-    color: #d9d9e6;
+    color: #545a74;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 11px;
@@ -186,8 +186,8 @@ a {
     display: block;
     width: 100%;
     padding: 18px;
-    background: #111522;
-    border: 1px dashed #45405f;
+    background: #f8f9ff;
+    border: 1px dashed #c9cde0;
     border-radius: 12px;
     color: var(--muted);
     font-family: inherit;
@@ -198,12 +198,12 @@ a {
 
 .file-input-wrapper input[type="file"]:hover {
     border-color: var(--primary);
-    background: #17172a;
+    background: #f3efff;
 }
 
 .file-input-wrapper input[type="file"]::file-selector-button {
-    background: #30294f;
-    color: #c3baff;
+    background: #eee8ff;
+    color: #6338dc;
     border: none;
     padding: 10px 15px;
     border-radius: 7px;
@@ -229,7 +229,7 @@ a {
     min-height: 48px;
     border: none;
     border-radius: 10px;
-    background: var(--primary);
+    background: linear-gradient(100deg, #7047eb, #934fe6);
     color: white;
     font-family: inherit;
     font-size: 12px;
@@ -239,7 +239,7 @@ a {
 }
 
 .submit-button:hover {
-    background: var(--primary-hover);
+    background: linear-gradient(100deg, #6038d8, #803dd8);
     transform: translateY(-1px);
 }
 
@@ -268,7 +268,7 @@ a {
 
 .page-footer {
     text-align: center;
-    color: #686f84;
+    color: #858aa3;
     font-size: 10px;
     margin-top: 35px;
 }

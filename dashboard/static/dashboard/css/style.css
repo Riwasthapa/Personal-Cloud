@@ -6,16 +6,16 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --background: #0d0f17;
-    --sidebar: #11141e;
-    --surface: #171b28;
-    --surface-hover: #202538;
-    --border: #272c3c;
-    --primary: #8878ff;
-    --primary-hover: #9a8dff;
-    --text: #f1f1f7;
-    --muted: #9298ab;
-    --danger: #ff737d;
+    --background: #f4f6ff;
+    --sidebar: #ffffff;
+    --surface: #ffffff;
+    --surface-hover: #f6f4ff;
+    --border: #e4e7f3;
+    --primary: #7047eb;
+    --primary-hover: #865ff5;
+    --text: #25243b;
+    --muted: #727792;
+    --danger: #e34f70;
 }
 
 * {
@@ -93,7 +93,7 @@ button {
 }
 
 .sidebar-label {
-    color: #6e7489;
+    color: #858aa3;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -124,8 +124,8 @@ button {
 
 .nav-link:hover,
 .nav-link.active {
-    background: rgba(136, 120, 255, 0.13);
-    color: var(--primary-hover);
+    background: #f0ebff;
+    color: #6338dc;
 }
 
 .sidebar-bottom {
@@ -148,8 +148,8 @@ button {
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: #39315f;
-    color: #c7bdff;
+    background: #eee8ff;
+    color: #6338dc;
     font-weight: 700;
 }
 
@@ -188,7 +188,7 @@ button {
 }
 
 .logout-button:hover {
-    background: rgba(255, 115, 125, 0.1);
+    background: #fff0f3;
     color: var(--danger);
 }
 
@@ -309,8 +309,8 @@ button {
     align-items: center;
     gap: 18px;
     padding: 22px 25px;
-    background: linear-gradient(110deg, #211e3d, #191d30);
-    border: 1px solid #373153;
+    background: linear-gradient(110deg, #eee8ff, #e5f7ff 58%, #e8fff5);
+    border: 1px solid #ded5ff;
     border-radius: 15px;
     margin-bottom: 45px;
 }
@@ -319,8 +319,8 @@ button {
     width: 48px;
     height: 48px;
     border-radius: 13px;
-    background: rgba(136, 120, 255, 0.17);
-    color: #b4a9ff;
+    background: #7047eb;
+    color: #ffffff;
     display: grid;
     place-items: center;
     font-size: 25px;
@@ -341,7 +341,7 @@ button {
 }
 
 .storage-action {
-    color: #b4a9ff;
+    color: #6338dc;
     font-size: 12px;
     font-weight: 700;
 }
@@ -395,8 +395,8 @@ button {
 
 .view-btn:hover,
 .view-btn.active {
-    background: rgba(136, 120, 255, 0.16);
-    color: var(--primary-hover);
+    background: #f0ebff;
+    color: #6338dc;
 }
 
 
@@ -477,7 +477,7 @@ button {
     width: 43px;
     height: 43px;
     flex-shrink: 0;
-    background: #24283a;
+    background: #f0efff;
     border-radius: 11px;
     display: grid;
     place-items: center;
@@ -495,23 +495,23 @@ button {
 }
 
 .pdf-icon {
-    color: #ff858c;
+    color: #d83f5c;
 }
 
 .image-icon {
-    color: #83b9ff;
+    color: #2874d0;
 }
 
 .zip-icon {
-    color: #e4bb76;
+    color: #a56a13;
 }
 
 .doc-icon {
-    color: #7cafff;
+    color: #2868c8;
 }
 
 .generic-icon {
-    color: #b9aaff;
+    color: #7047eb;
 }
 
 .file-details {
@@ -564,11 +564,11 @@ button {
 }
 
 .download-action {
-    color: #a99dff;
+    color: #7047eb;
 }
 
 .download-action:hover {
-    background: rgba(136, 120, 255, 0.15);
+    background: #f0ebff;
 }
 
 .delete-action {
@@ -576,14 +576,14 @@ button {
 }
 
 .delete-action:hover {
-    background: rgba(255, 115, 125, 0.12);
+    background: #fff0f3;
 }
 
 
 /* EMPTY STATE */
 
 .empty-state {
-    border: 1px dashed #34394d;
+    border: 1px dashed #cbd0e4;
     border-radius: 15px;
     padding: 65px 20px;
     text-align: center;
@@ -597,7 +597,7 @@ button {
     display: grid;
     place-items: center;
     border-radius: 20px;
-    background: rgba(136, 120, 255, 0.12);
+    background: #eee8ff;
     color: var(--primary);
     font-size: 35px;
 }
@@ -625,7 +625,7 @@ button {
     margin-top: 55px;
     padding-top: 20px;
     border-top: 1px solid var(--border);
-    color: #6e7489;
+    color: #858aa3;
     font-size: 10px;
 }
 

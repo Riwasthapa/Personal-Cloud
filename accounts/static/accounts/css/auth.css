@@ -6,8 +6,11 @@
 
 body {
     min-height: 100vh;
-    background: #0B0D12;
-    color: #F3F5FA;
+    background:
+        radial-gradient(ellipse at 15% 15%, rgba(119, 88, 245, 0.15), transparent 38%),
+        radial-gradient(ellipse at 85% 85%, rgba(46, 187, 209, 0.14), transparent 38%),
+        #f4f6ff;
+    color: #25243b;
     font-family: Arial, sans-serif;
     display: flex;
     align-items: center;
@@ -18,10 +21,11 @@ body {
 .auth-container {
     width: 100%;
     max-width: 430px;
-    background: #141821;
-    border: 1px solid #252B38;
+    background: #ffffff;
+    border: 1px solid #e4e7f3;
     border-radius: 18px;
     padding: 36px;
+    box-shadow: 0 24px 70px rgba(63, 54, 117, 0.13);
 }
 
 .brand {
@@ -32,8 +36,8 @@ body {
 .brand-logo {
     width: 48px;
     height: 48px;
-    background: #8B9DFF;
-    color: #0B0D12;
+    background: linear-gradient(135deg, #7047eb, #a149e8);
+    color: #ffffff;
     display: grid;
     place-items: center;
     border-radius: 14px;
@@ -48,7 +52,7 @@ body {
 }
 
 .brand p {
-    color: #929AAA;
+    color: #727792;
     font-size: 13px;
 }
 
@@ -58,7 +62,7 @@ body {
 }
 
 .auth-subtitle {
-    color: #929AAA;
+    color: #727792;
     font-size: 14px;
     margin-bottom: 26px;
 }
@@ -69,7 +73,7 @@ body {
 
 .auth-form label {
     display: block;
-    color: #C5CAD5;
+    color: #545a74;
     font-size: 13px;
     margin-bottom: 8px;
 }
@@ -77,23 +81,24 @@ body {
 .auth-form input {
     width: 100%;
     padding: 13px;
-    background: #0B0D12;
-    border: 1px solid #303747;
+    background: #f8f9ff;
+    border: 1px solid #dfe3f1;
     border-radius: 9px;
-    color: #F3F5FA;
+    color: #25243b;
     font-size: 14px;
     outline: none;
 }
 
 .auth-form input:focus {
-    border-color: #8B9DFF;
+    border-color: #7047eb;
+    box-shadow: 0 0 0 3px rgba(112, 71, 235, 0.13);
 }
 
 .auth-form button {
     width: 100%;
     padding: 14px;
-    background: #8B9DFF;
-    color: #0B0D12;
+    background: linear-gradient(100deg, #7047eb, #934fe6);
+    color: #ffffff;
     border: none;
     border-radius: 9px;
     font-weight: bold;
@@ -102,18 +107,18 @@ body {
 }
 
 .auth-form button:hover {
-    background: #A5B2FF;
+    background: linear-gradient(100deg, #6038d8, #803dd8);
 }
 
 .auth-footer {
     text-align: center;
-    color: #929AAA;
+    color: #727792;
     font-size: 14px;
     margin-top: 24px;
 }
 
 .auth-footer a {
-    color: #8B9DFF;
+    color: #7047eb;
     text-decoration: none;
 }
 
@@ -122,7 +127,7 @@ body {
 }
 
 .errorlist {
-    color: #FF7777;
+    color: #d83f5c;
     font-size: 13px;
     list-style: none;
     margin-top: 6px;
