@@ -17,9 +17,11 @@ def get_cloud_files():
     files = []
 
     for path in sorted(folder.iterdir(), key=lambda p: p.name.lower()):
-        if path.is_file() and path.suffix.lower() in {
+        if (
+            path.is_file() and not path.name.startswith(".") and path.suffix.lower() in {
             ".jpg", ".jpeg", ".png", ".webp", ".gif"
-        }:
+            }
+        ):
             stat = path.stat()
             files.append({
                 "name": path.name,
