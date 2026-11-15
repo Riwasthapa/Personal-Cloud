@@ -39,22 +39,25 @@ def upload_file(request):
         form = FileUploadForm(request.POST, request.FILES)
 
         if form.is_valid():
-            uploaded = request.FILES["file"]
             folder = Path(settings.ANDROID_MEDIA_ROOT)
             folder.mkdir(parents=True, exist_ok=True)
 
-            destination = folder / Path(uploaded.name).name
+            uploads = [
+                (uploaded, folder / Path(uploaded.name.replace("\\", "/")).name)
+                for uploaded in form.cleaned_data["files"]
+            ]
+            names = [destination.name for _, destination in uploads]
 
-            # Avoid overwriting an existing image.
-            if destination.exists():
-                return render(request, "storage/upload.html", {
-                    "form": form,
-                    "error": "A file with that name already exists.",
-                })
+            if len(names) != len(set(names)) or any(
+                destination.exists() for _, destination in uploads
+            ):
+                form.add_error("files", "A file with that name already exists.")
+                return render(request, "storage/upload.html", {"form": form})
 
-            with destination.open("wb") as output:
-                for chunk in uploaded.chunks():
-                    output.write(chunk)
+            for uploaded, destination in uploads:
+                with destination.open("xb") as output:
+                    for chunk in uploaded.chunks():
+                        output.write(chunk)
 
             return redirect("home")
 
