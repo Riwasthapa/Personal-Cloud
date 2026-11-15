@@ -8,7 +8,7 @@ A self-hosted personal cloud storage application built with Django and Python.
 - Email-based login
 - Password validation
 - Protected user dashboard
-- File uploads
+- Single and bulk file uploads
 - User-specific file listing
 - File downloads
 - Secure file deletion with ownership checks
@@ -84,7 +84,9 @@ Open http://127.0.0.1:8000/ in your browser.
 
 ## Storage
 
-Uploaded files are currently stored locally in the `media/uploads/` directory.
+The default upload directory is `/storage/emulated/0/Pictures/Gallery/owner/Personal Cloud`.
+Set `ANDROID_MEDIA_ROOT` in `.env` to override it when using a different storage
+directory, such as a writable local folder during development.
 
 ## Project Status
 
