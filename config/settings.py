@@ -134,7 +134,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 ANDROID_MEDIA_ROOT = Path(
     os.getenv(
         'ANDROID_MEDIA_ROOT',
-        '/storage/emulated/0/Pictures/Gallery/owner/Personal Cloud',
+        # Android-only storage path:
+        # '/storage/emulated/0/Pictures/Gallery/owner/Personal Cloud',
+        str(Path.home() / 'Documents' / 'Personal Cloud'),
     )
 )
 # Default primary key field type
