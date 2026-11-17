@@ -202,18 +202,143 @@ button {
 }
 
 .topbar {
-    height: 82px;
+    min-height: 82px;
     padding: 0 55px;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.topbar > div {
+.topbar-left {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.topbar-heading {
+    display: flex;
+    align-items: center;
     gap: 9px;
+}
+
+.breadcrumb {
+    color: var(--muted);
     font-size: 13px;
+    font-weight: 500;
+}
+
+.breadcrumb-separator {
+    color: #b7bbcc;
+    font-size: 13px;
+}
+
+.topbar-heading h1 {
+    color: var(--text);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.topbar-subtitle {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.topbar-action {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    transition: 0.2s;
+}
+
+.topbar-action:hover {
+    border-color: var(--border);
+    background: #f0ebff;
+    color: #6338dc;
+}
+
+.topbar-action:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.topbar-action svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.topbar-divider {
+    width: 1px;
+    height: 34px;
+    background: var(--border);
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.topbar-avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #eee8ff;
+    color: #6338dc;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.topbar-user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.topbar-user-name {
+    max-width: 180px;
+    overflow: hidden;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-user-role {
+    color: var(--muted);
+    font-size: 10px;
 }
 
 .breadcrumb {
@@ -664,6 +789,10 @@ button {
         padding: 0 30px;
     }
 
+    .topbar-right {
+        gap: 12px;
+    }
+
     .page-content {
         padding: 40px 30px;
     }
@@ -713,17 +842,50 @@ button {
     }
 
     .topbar {
-        height: 68px;
-        padding: 0 18px;
+        min-height: 70px;
+        padding: 10px 18px;
     }
 
-    .topbar > div {
+    .topbar-subtitle,
+    .topbar-user-info,
+    .topbar-divider {
+        display: none;
+    }
+
+    .topbar-heading {
+        gap: 6px;
+    }
+
+    .topbar-heading h1 {
+        font-size: 17px;
+    }
+
+    .breadcrumb {
         font-size: 11px;
     }
 
-    .topbar .upload-button {
-        padding: 10px 12px;
-        font-size: 11px;
+    .topbar-right {
+        gap: 7px;
+    }
+
+    .topbar-actions {
+        gap: 1px;
+    }
+
+    .topbar-action {
+        width: 33px;
+        height: 33px;
+    }
+
+    .topbar-action svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .topbar-avatar {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
     }
 
     .page-content {
