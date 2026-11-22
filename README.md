@@ -84,9 +84,52 @@ Open http://127.0.0.1:8000/ in your browser.
 
 ## Storage
 
-The default upload directory is `/storage/emulated/0/Pictures/Gallery/owner/Personal Cloud`.
-Set `ANDROID_MEDIA_ROOT` in `.env` to override it when using a different storage
-directory, such as a writable local folder during development.
+On macOS, uploads are stored in `~/Documents/Personal Cloud` by default. On
+Android with Termux, the default is `~/storage/shared/Personal Cloud`, which is
+shared with the phone's files and gallery apps. Set `ANDROID_MEDIA_ROOT` in
+`.env` to use another directory.
+
+## Run on an Android phone with Termux
+
+The Django app must run on the phone to write uploads to its storage and report
+the phone's available space. Install Termux from a supported source, open it,
+and grant shared-storage access:
+
+```bash
+termux-setup-storage
+pkg update
+pkg install python git
+```
+
+Copy the current project to the phone (for example, clone the branch containing
+your latest changes), then in Termux change into the project directory and run:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+Use the generated value to create a `.env` file in the project directory:
+
+```env
+DJANGO_SECRET_KEY=paste-generated-value-here
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
+```
+
+Then continue setup:
+
+```bash
+python manage.py migrate
+python manage.py runserver 127.0.0.1:8000
+```
+
+Open http://127.0.0.1:8000/ in the phone's browser. The app will use
+`~/storage/shared/Personal Cloud` for uploads and measure free space on the
+phone's shared-storage volume. Register an account on the phone if this is a
+fresh installation; its SQLite database is separate from the Mac's.
 
 ## Project Status
 
