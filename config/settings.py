@@ -132,7 +132,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 if os.getenv('ANDROID_ROOT'):
-    default_storage_root = Path.home() / 'storage' / 'shared' / 'Personal Cloud'
+    default_storage_root = (
+        Path.home()
+        / 'storage'
+        / 'shared'
+        / 'Pictures'
+        / 'Gallery'
+        / 'owner'
+        / 'PersonalCloud'
+    )
 else:
     default_storage_root = Path.home() / 'Documents' / 'Personal Cloud'
 
