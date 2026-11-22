@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Cloud | My Files</title>
 
-    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}?v=5">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}?v=6">
 </head>
 
 <body>
@@ -125,7 +125,7 @@
                         <span class="topbar-user-name">
                             {{ request.user.get_full_name|default:request.user.email }}
                         </span>
-                        <span class="topbar-user-role">Personal Account</span>
+                        <span class="topbar-user-role">{{ request.user.email }}</span>
                     </div>
                 </div>
             </div>
@@ -168,77 +168,91 @@
 
                 {% if files %}
 
-                    <div class="file-list list-view" id="fileList">
+<div class="file-list list-view" id="fileList">
 
-                        
-{% for file in files %}
-    <div class="file-row">
+    {% for group in file_groups %}
 
-        <div class="file-icon">
-            <img
-                src="{{ file.url }}"
-                alt="{{ file.name }}"
-                class="file-thumbnail"
-                loading="lazy"
-            >
+        <!-- DATE SECTION -->
+        <div class="date-heading">
+            <h3>{{ group.heading }}</h3>
+            <span>{{ group.files|length }} files</span>
         </div>
 
-        <div class="file-details">
-            <strong>{{ file.name }}</strong>
-            <span>{{ file.file_size|filesizeformat }}</span>
-        </div>
+        {% for file in group.files %}
 
-        <div class="file-date">
-            {{ file.uploaded_at|date:"d M Y" }}
-        </div>
+            <div class="file-row">
 
-        <div class="file-actions">
+                <div class="file-icon">
+                    <img
+                        src="{{ file.url }}"
+                        alt="{{ file.name }}"
+                        class="file-thumbnail"
+                        loading="lazy"
+                    >
+                </div>
 
-            <a href="{{ file.url }}"
-               class="action-button view-action"
-               target="_blank"
-               title="View"
-               aria-label="View {{ file.name }}">
-                <svg class="action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
-                    <circle cx="12" cy="12" r="3" />
-                </svg>
-            </a>
+                <div class="file-details">
+                    <strong>{{ file.name }}</strong>
+                    <span>{{ file.file_size|filesizeformat }}</span>
+                </div>
 
-            <form method="POST"
-                  action="{% url 'download_file' file.name %}">
-                {% csrf_token %}
-                <button type="submit"
-                        class="action-button download-action"
-                        title="Download"
-                        aria-label="Download {{ file.name }}">
-                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 20h16" />
-                    </svg>
-                </button>
-            </form>
+                <div class="file-date">
+                    {{ file.uploaded_at|date:"d M Y" }}
+                </div>
 
-            <form method="POST"
-                  action="{% url 'delete_file' file.name %}"
-                  onsubmit="return confirm('Permanently delete this file?');">
-                {% csrf_token %}
-                <button type="submit"
-                        class="action-button delete-action"
-                        title="Delete"
-                        aria-label="Delete {{ file.name }}">
-                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <path d="M3 6h18m-2 0-.9 14H5.9L5 6m4 0V4h6v2m-5 4v6m4-6v6" />
-                    </svg>
-                </button>
-            </form>
+                <div class="file-actions">
 
-        </div>
+                    <a href="{{ file.url }}"
+                       class="action-button view-action"
+                       target="_blank"
+                       title="View"
+                       aria-label="View {{ file.name }}">
+                        <svg class="action-icon" viewBox="0 0 24 24"
+                             fill="none" aria-hidden="true">
+                            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </a>
 
-    </div>
-{% endfor %}
+                    <form method="POST"
+                          action="{% url 'download_file' file.name %}">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="action-button download-action"
+                                title="Download"
+                                aria-label="Download {{ file.name }}">
+                            <svg class="action-icon" viewBox="0 0 24 24"
+                                 fill="none" aria-hidden="true">
+                                <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 20h16" />
+                            </svg>
+                        </button>
+                    </form>
 
+                    <form method="POST"
+                          action="{% url 'delete_file' file.name %}"
+                          onsubmit="return confirm('Permanently delete this file?');">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="action-button delete-action"
+                                title="Delete"
+                                aria-label="Delete {{ file.name }}">
+                            <svg class="action-icon" viewBox="0 0 24 24"
+                                 fill="none" aria-hidden="true">
+                                <path d="M3 6h18m-2 0-.9 14H5.9L5 6m4 0V4h6v2m-5 4v6m4-6v6" />
+                            </svg>
+                        </button>
+                    </form>
 
-                    </div>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% endfor %}
+
+</div>
+
 
                 {% else %}
 
