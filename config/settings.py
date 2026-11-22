@@ -139,10 +139,14 @@ if os.getenv('ANDROID_ROOT'):
         / 'Pictures'
         / 'Gallery'
         / 'owner'
-        / 'PersonalCloud'
+        / 'Personal Cloud'
     )
 else:
     default_storage_root = Path.home() / 'Documents' / 'Personal Cloud'
+
+ANDROID_MEDIA_ROOT = Path(
+    os.getenv('ANDROID_MEDIA_ROOT', str(default_storage_root))
+)
 
 ANDROID_MEDIA_ROOT = Path(
     os.getenv('ANDROID_MEDIA_ROOT', str(default_storage_root))
