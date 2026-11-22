@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Cloud | My Files</title>
 
-    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}?v=3">
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}?v=5">
 </head>
 
 <body>
@@ -34,6 +34,31 @@
                 <span>↑</span> Upload Files
             </a>
         </nav>
+
+        <section class="sidebar-storage" aria-label="Available storage">
+            <div class="sidebar-storage-heading">
+                <span class="sidebar-storage-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 6.5h16v11H4z"/>
+                        <path d="M4 10h16M8 14.5h.01M11 14.5h.01"/>
+                    </svg>
+                </span>
+                <span>Available storage</span>
+            </div>
+            <strong class="sidebar-storage-value">
+                {{ available_storage_bytes|filesizeformat }}
+            </strong>
+            <div class="sidebar-storage-meter"
+                 role="progressbar"
+                 aria-label="Device storage used"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="{{ storage_used_percent }}">
+                <span class="sidebar-storage-meter-fill"
+                      style="width: {{ storage_used_percent }}%"></span>
+            </div>
+            <span class="sidebar-storage-caption">{{ storage_used_percent }}% used on this device</span>
+        </section>
 
         <div class="sidebar-bottom">
             <div class="sidebar-label">ACCOUNT</div>
@@ -64,14 +89,6 @@
     <main class="main-content">
 
         <header class="topbar">
-            <div class="topbar-left">
-                <div class="topbar-heading">
-                    <span class="breadcrumb">Workspace</span>
-                    <span class="breadcrumb-separator">/</span>
-                    <h1>My Files</h1>
-                </div>
-                <p class="topbar-subtitle">Manage your personal storage</p>
-            </div>
 
             <div class="topbar-right">
                 <div class="topbar-actions">
@@ -91,8 +108,9 @@
                             aria-label="Settings"
                             title="Settings">
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.1h-2.5v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H6.5v-2.5h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5v-.1h2.5v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1V14h-.1a1.7 1.7 0 0 0-1.5 1Z"/>
+                            <path d="M12 3.25v2.1M12 18.65v2.1M20.75 12h-2.1M5.35 12h-2.1M18.19 5.81l-1.49 1.49M7.3 16.7l-1.49 1.49M18.19 18.19 16.7 16.7M7.3 7.3 5.81 5.81"/>
+                            <circle cx="12" cy="12" r="6.1"/>
+                            <circle cx="12" cy="12" r="2.15"/>
                         </svg>
                     </button>
                 </div>

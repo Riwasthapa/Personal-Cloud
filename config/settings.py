@@ -131,13 +131,13 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
+if os.getenv('ANDROID_ROOT'):
+    default_storage_root = Path.home() / 'storage' / 'shared' / 'Personal Cloud'
+else:
+    default_storage_root = Path.home() / 'Documents' / 'Personal Cloud'
+
 ANDROID_MEDIA_ROOT = Path(
-    os.getenv(
-        'ANDROID_MEDIA_ROOT',
-        # Android-only storage path:
-        # '/storage/emulated/0/Pictures/Gallery/owner/Personal Cloud',
-        str(Path.home() / 'Documents' / 'Personal Cloud'),
-    )
+    os.getenv('ANDROID_MEDIA_ROOT', str(default_storage_root))
 )
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
