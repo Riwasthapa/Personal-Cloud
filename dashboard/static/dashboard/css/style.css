@@ -594,11 +594,40 @@ button {
 
 /* FILE ROWS */
 
+.date-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 0 12px;
+    margin-top: 12px;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.date-heading:first-child {
+    margin-top: 0;
+}
+
+.date-heading h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.date-heading span {
+    font-size: 12px;
+    color: var(--text-secondary, #888);
+}
+
 .file-list {
     border: 1px solid var(--border);
     border-radius: 13px;
     overflow: hidden;
     background: var(--surface);
+}
+
+.file-list.grid-view .date-heading {
+    grid-column: 1 / -1;
 }
 
 .file-row {
