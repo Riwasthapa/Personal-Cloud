@@ -1,0 +1,296 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Cloud | My Files</title>
+
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}?v=6">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <a href="{% url 'home' %}" class="brand">
+            <div class="brand-icon">☁</div>
+            <span>Personal<span class="brand-highlight">Cloud</span></span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav">
+            <a href="{% url 'home' %}" class="nav-link ">
+                <span>▦</span> My Files
+            </a>
+            <a href="{% url 'folders' %}" class="nav-link active">
+                <span aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h7l2 2H21v9.5H3z"/><path d="M3 8.5h18"/></svg></span>Folders
+            </a>
+
+            <a href="{% url 'upload_file' %}" class="nav-link">
+                <span>↑</span> Upload Files
+            </a>
+        </nav>
+
+        <section class="sidebar-storage" aria-label="Available storage">
+            <div class="sidebar-storage-heading">
+                <span class="sidebar-storage-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 6.5h16v11H4z"/>
+                        <path d="M4 10h16M8 14.5h.01M11 14.5h.01"/>
+                    </svg>
+                </span>
+                <span>Available storage</span>
+            </div>
+            <strong class="sidebar-storage-value">
+                {{ available_storage_bytes|filesizeformat }}
+            </strong>
+            <div class="sidebar-storage-meter"
+                 role="progressbar"
+                 aria-label="Device storage used"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="{{ storage_used_percent }}">
+                <span class="sidebar-storage-meter-fill"
+                      style="width: {{ storage_used_percent }}%"></span>
+            </div>
+            <span class="sidebar-storage-caption">{{ storage_used_percent }}% used on this device</span>
+        </section>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-label">ACCOUNT</div>
+
+            <div class="user-card">
+                <div class="avatar">
+                    {{ request.user.first_name|first|upper|default:"U" }}
+                </div>
+
+                <div class="user-info">
+                    <strong>{{ request.user.get_full_name|default:request.user.email }}</strong>
+                    <span>Personal account</span>
+                </div>
+            </div>
+
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    <span>↪</span> Sign out
+                </button>
+            </form>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div class="topbar-right">
+                <div class="topbar-user">
+                    <div class="topbar-avatar" aria-hidden="true">
+                        {{ request.user.first_name|first|upper|default:"U" }}
+                    </div>
+                    <div class="topbar-user-info">
+                        <span class="topbar-user-name">
+                            {{ request.user.get_full_name|default:request.user.email }}
+                        </span>
+                        <span class="topbar-user-role">{{ request.user.email }}</span>
+                    </div>
+                </div>
+
+                <div class="topbar-divider" aria-hidden="true"></div>
+
+                <div class="topbar-actions">
+                    <button class="topbar-action"
+                            type="button"
+                            aria-label="About Personal Cloud"
+                            title="About">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M9.6 9a2.4 2.4 0 1 1 4.1 1.7c-.8.8-1.7 1-1.7 2.3"/>
+                            <path d="M12 16.5h.01"/>
+                        </svg>
+                    </button>
+
+                    <button class="topbar-action"
+                            type="button"
+                            aria-label="Settings"
+                            title="Settings">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 3.25v2.1M12 18.65v2.1M20.75 12h-2.1M5.35 12h-2.1M18.19 5.81l-1.49 1.49M7.3 16.7l-1.49 1.49M18.19 18.19 16.7 16.7M7.3 7.3 5.81 5.81"/>
+                            <circle cx="12" cy="12" r="6.1"/>
+                            <circle cx="12" cy="12" r="2.15"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-content">
+            <section class="files-section">
+                <div class="section-heading">
+                    <div>
+                        <h2>Folders</h2>
+                        <p>Browse your uploaded files, grouped by date.</p>
+                    </div>
+                    {% if files %}
+                        <div class="view-toggle">
+                            <button type="button" id="listViewBtn" class="view-btn" title="List view" aria-label="List view" aria-pressed="true">☰</button>
+                            <button type="button" id="gridViewBtn" class="view-btn" title="Grid view" aria-label="Grid view" aria-pressed="false">▦</button>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% if files %}
+                    <div class="file-list list-view" id="fileList">
+
+    {% for group in file_groups %}
+
+        <!-- DATE SECTION -->
+        <div class="date-heading">
+            <h3>{{ group.heading }}</h3>
+            <span>{{ group.files|length }} files</span>
+        </div>
+
+        {% for file in group.files %}
+
+            <div class="file-row">
+
+                <div class="file-icon">
+                    <img
+                        src="{{ file.url }}"
+                        alt="{{ file.name }}"
+                        class="file-thumbnail"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="file-details">
+                    <strong>{{ file.name }}</strong>
+                    <span>{{ file.file_size|filesizeformat }}</span>
+                </div>
+
+                <div class="file-date">
+                    {{ file.uploaded_at|date:"d M Y" }}
+                </div>
+
+                <div class="file-actions">
+
+                    <a href="{{ file.url }}"
+                       class="action-button view-action"
+                       target="_blank"
+                       title="View"
+                       aria-label="View {{ file.name }}">
+                        <svg class="action-icon" viewBox="0 0 24 24"
+                             fill="none" aria-hidden="true">
+                            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </a>
+
+                    <form method="POST"
+                          action="{% url 'download_file' file.name %}">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="action-button download-action"
+                                title="Download"
+                                aria-label="Download {{ file.name }}">
+                            <svg class="action-icon" viewBox="0 0 24 24"
+                                 fill="none" aria-hidden="true">
+                                <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 20h16" />
+                            </svg>
+                        </button>
+                    </form>
+
+                    <form method="POST"
+                          action="{% url 'delete_file' file.name %}"
+                          onsubmit="return confirm('Permanently delete this file?');">
+                        {% csrf_token %}
+                        <button type="submit"
+                                class="action-button delete-action"
+                                title="Delete"
+                                aria-label="Delete {{ file.name }}">
+                            <svg class="action-icon" viewBox="0 0 24 24"
+                                 fill="none" aria-hidden="true">
+                                <path d="M3 6h18m-2 0-.9 14H5.9L5 6m4 0V4h6v2m-5 4v6m4-6v6" />
+                            </svg>
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    {% endfor %}
+
+                    </div>
+                {% else %}
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">☁</div>
+
+                        <h3>Your cloud is empty</h3>
+
+                        <p>
+                            You haven't uploaded any files yet.
+                            Start by adding your first file.
+                        </p>
+
+                        <a href="{% url 'upload_file' %}" class="upload-button">
+                            + Upload your first file
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+            <footer class="footer">
+                <span>Personal Cloud</span>
+                <span>Your files. Your space. Your control.</span>
+            </footer>
+
+        </section>
+
+    </main>
+
+</div>
+
+    {% if files %}
+        <script>
+            const fileList = document.getElementById("fileList");
+            const listBtn = document.getElementById("listViewBtn");
+            const gridBtn = document.getElementById("gridViewBtn");
+
+            function setView(view) {
+                fileList.classList.remove("list-view", "grid-view");
+                fileList.classList.add(`${view}-view`);
+
+                listBtn.classList.toggle("active", view === "list");
+                gridBtn.classList.toggle("active", view === "grid");
+                listBtn.setAttribute("aria-pressed", String(view === "list"));
+                gridBtn.setAttribute("aria-pressed", String(view === "grid"));
+
+                localStorage.setItem("cloudView", view);
+            }
+
+            listBtn.addEventListener("click", () => setView("list"));
+            gridBtn.addEventListener("click", () => setView("grid"));
+
+            setView(localStorage.getItem("cloudView") === "grid" ? "grid" : "list");
+        </script>
+    {% endif %}
+</body>
+</html>

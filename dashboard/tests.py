@@ -64,3 +64,10 @@ class DashboardStorageTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["storage_used_percent"], 0)
+
+    def test_folders_page_opens_from_sidebar_destination(self):
+        response = self.client.get(reverse("folders"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "<h2>Folders</h2>")
+        self.assertContains(response, 'href="/folders/" class="nav-link active"')
