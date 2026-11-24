@@ -11,6 +11,15 @@ from storage.views import get_cloud_files
 
 @login_required
 def home(request):
+    return render(request, 'dashboard/home.html', _dashboard_context())
+
+
+@login_required
+def folders(request):
+    return render(request, 'dashboard/folders.html', _dashboard_context())
+
+
+def _dashboard_context():
     files = get_cloud_files()
 
     # Sort newest files first
@@ -53,9 +62,9 @@ def home(request):
         else 0
     )
 
-    return render(request, 'dashboard/home.html', {
+    return {
         'files': files,
         'file_groups': file_groups,
         'available_storage_bytes': available_storage_bytes,
         'storage_used_percent': storage_used_percent,
-    })
+    }

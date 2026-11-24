@@ -128,9 +128,75 @@ button {
     color: #6338dc;
 }
 
-.sidebar-bottom {
+.sidebar-storage {
     margin-top: auto;
-    padding-top: 35px;
+    padding: 16px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f8f6ff, #f3fbff);
+}
+
+.sidebar-storage-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.sidebar-storage-icon {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #eee8ff;
+    color: var(--primary);
+}
+
+.sidebar-storage-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sidebar-storage-value {
+    display: block;
+    margin: 12px 0 10px;
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.sidebar-storage-meter {
+    height: 6px;
+    margin-bottom: 7px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e7e5f1;
+}
+
+.sidebar-storage-meter-fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--primary), #9b7aff);
+    transition: width 0.3s ease;
+}
+
+.sidebar-storage-caption {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.sidebar-bottom {
+    margin-top: 18px;
+    padding-top: 0;
 }
 
 .user-card {
@@ -202,18 +268,144 @@ button {
 }
 
 .topbar {
-    height: 82px;
+    min-height: 82px;
     padding: 0 55px;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
 
-.topbar > div {
+.topbar-left {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.topbar-heading {
+    display: flex;
+    align-items: center;
     gap: 9px;
+}
+
+.breadcrumb {
+    color: var(--muted);
     font-size: 13px;
+    font-weight: 500;
+}
+
+.breadcrumb-separator {
+    color: #b7bbcc;
+    font-size: 13px;
+}
+
+.topbar-heading h1 {
+    color: var(--text);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.topbar-subtitle {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.topbar-action {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--muted);
+    transition: 0.2s;
+}
+
+.topbar-action:hover {
+    border-color: var(--border);
+    background: #f0ebff;
+    color: #6338dc;
+}
+
+.topbar-action:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.topbar-action svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.topbar-divider {
+    width: 1px;
+    height: 34px;
+    background: var(--border);
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.topbar-avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #eee8ff;
+    color: #6338dc;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.topbar-user-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.topbar-user-name {
+    max-width: 180px;
+    overflow: hidden;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.topbar-user-role {
+    color: var(--muted);
+    font-size: 10px;
 }
 
 .breadcrumb {
@@ -402,11 +594,40 @@ button {
 
 /* FILE ROWS */
 
+.date-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 18px 0 12px;
+    margin-top: 12px;
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.date-heading:first-child {
+    margin-top: 0;
+}
+
+.date-heading h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.date-heading span {
+    font-size: 12px;
+    color: var(--text-secondary, #888);
+}
+
 .file-list {
     border: 1px solid var(--border);
     border-radius: 13px;
     overflow: hidden;
     background: var(--surface);
+}
+
+.file-list.grid-view .date-heading {
+    grid-column: 1 / -1;
 }
 
 .file-row {
@@ -664,6 +885,10 @@ button {
         padding: 0 30px;
     }
 
+    .topbar-right {
+        gap: 12px;
+    }
+
     .page-content {
         padding: 40px 30px;
     }
@@ -683,6 +908,10 @@ button {
         height: auto;
         overflow-y: visible;
         padding: 15px 18px;
+    }
+
+    .sidebar-storage {
+        margin-top: 14px;
         border-right: none;
         border-bottom: 1px solid var(--border);
     }
@@ -713,17 +942,50 @@ button {
     }
 
     .topbar {
-        height: 68px;
-        padding: 0 18px;
+        min-height: 70px;
+        padding: 10px 18px;
     }
 
-    .topbar > div {
+    .topbar-subtitle,
+    .topbar-user-info,
+    .topbar-divider {
+        display: none;
+    }
+
+    .topbar-heading {
+        gap: 6px;
+    }
+
+    .topbar-heading h1 {
+        font-size: 17px;
+    }
+
+    .breadcrumb {
         font-size: 11px;
     }
 
-    .topbar .upload-button {
-        padding: 10px 12px;
-        font-size: 11px;
+    .topbar-right {
+        gap: 7px;
+    }
+
+    .topbar-actions {
+        gap: 1px;
+    }
+
+    .topbar-action {
+        width: 33px;
+        height: 33px;
+    }
+
+    .topbar-action svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .topbar-avatar {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
     }
 
     .page-content {
