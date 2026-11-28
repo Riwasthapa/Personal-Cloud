@@ -6,16 +6,19 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --background: #f4f6ff;
-    --sidebar: #ffffff;
-    --surface: #ffffff;
-    --surface-hover: #f6f4ff;
-    --border: #e4e7f3;
-    --primary: #7047eb;
-    --primary-hover: #865ff5;
-    --text: #25243b;
-    --muted: #727792;
-    --danger: #e34f70;
+    --background: #D6D3D1;
+    --sidebar: #292524;
+    --surface: #F5F5F4;
+    --surface-hover: #E7E5E4;
+    --border: #A8A29E;
+    --primary: #EA580C;
+    --primary-hover: #C2410C;
+    --text: #292524;
+    --muted: #57534E;
+    --danger: #EA580C;
+    --sidebar-text: #F5F5F4;
+    --sidebar-muted: #D6D3D1;
+    --sidebar-border: rgba(214, 211, 209, 0.2);
 }
 
 * {
@@ -61,7 +64,7 @@ button {
     height: 100vh;
     overflow-y: auto;
     background: var(--sidebar);
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--sidebar-border);
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -75,6 +78,10 @@ button {
     font-weight: 800;
     margin-bottom: 55px;
     letter-spacing: -0.6px;
+}
+
+.sidebar .brand {
+    color: var(--sidebar-text);
 }
 
 .brand-icon {
@@ -93,7 +100,7 @@ button {
 }
 
 .sidebar-label {
-    color: #858aa3;
+    color: var(--sidebar-muted);
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -112,7 +119,7 @@ button {
     gap: 13px;
     padding: 13px 14px;
     border-radius: 10px;
-    color: var(--muted);
+    color: var(--sidebar-muted);
     font-size: 13px;
     font-weight: 600;
     transition: 0.2s;
@@ -124,8 +131,8 @@ button {
 
 .nav-link:hover,
 .nav-link.active {
-    background: #f0ebff;
-    color: #6338dc;
+    background: var(--primary);
+    color: var(--sidebar-text);
 }
 
 .sidebar-storage {
@@ -133,14 +140,15 @@ button {
     padding: 16px 14px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: linear-gradient(135deg, #f8f6ff, #f3fbff);
+    background: rgba(214, 211, 209, 0.06);
+    border-color: var(--sidebar-border);
 }
 
 .sidebar-storage-heading {
     display: flex;
     align-items: center;
     gap: 9px;
-    color: var(--muted);
+    color: var(--sidebar-muted);
     font-size: 11px;
     font-weight: 600;
 }
@@ -151,8 +159,8 @@ button {
     display: grid;
     place-items: center;
     border-radius: 8px;
-    background: #eee8ff;
-    color: var(--primary);
+    background: rgba(234, 88, 12, 0.2);
+    color: #FDBA74;
 }
 
 .sidebar-storage-icon svg {
@@ -167,7 +175,7 @@ button {
 .sidebar-storage-value {
     display: block;
     margin: 12px 0 10px;
-    color: var(--text);
+    color: var(--sidebar-text);
     font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -178,19 +186,19 @@ button {
     margin-bottom: 7px;
     overflow: hidden;
     border-radius: 999px;
-    background: #e7e5f1;
+    background: rgba(214, 211, 209, 0.2);
 }
 
 .sidebar-storage-meter-fill {
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: linear-gradient(90deg, var(--primary), #9b7aff);
+    background: var(--primary);
     transition: width 0.3s ease;
 }
 
 .sidebar-storage-caption {
-    color: var(--muted);
+    color: var(--sidebar-muted);
     font-size: 10px;
 }
 
@@ -204,7 +212,7 @@ button {
     align-items: center;
     gap: 11px;
     padding: 13px 8px;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--sidebar-border);
     margin-top: 8px;
 }
 
@@ -214,8 +222,8 @@ button {
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: #eee8ff;
-    color: #6338dc;
+    background: rgba(234, 88, 12, 0.2);
+    color: #FDBA74;
     font-weight: 700;
 }
 
@@ -230,11 +238,12 @@ button {
     font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--sidebar-text);
 }
 
 .user-info span {
     font-size: 10px;
-    color: var(--muted);
+    color: var(--sidebar-muted);
 }
 
 .logout-button {
@@ -243,7 +252,7 @@ button {
     border: none;
     background: transparent;
     text-align: left;
-    color: var(--muted);
+    color: var(--sidebar-muted);
     border-radius: 9px;
     font-size: 13px;
     transition: 0.2s;
@@ -254,7 +263,7 @@ button {
 }
 
 .logout-button:hover {
-    background: #fff0f3;
+    background: rgba(234, 88, 12, 0.15);
     color: var(--danger);
 }
 
@@ -299,7 +308,7 @@ button {
 }
 
 .breadcrumb-separator {
-    color: #b7bbcc;
+    color: var(--muted);
     font-size: 13px;
 }
 
@@ -342,8 +351,8 @@ button {
 
 .topbar-action:hover {
     border-color: var(--border);
-    background: #f0ebff;
-    color: #6338dc;
+    background: #FFEDD5;
+    color: var(--primary-hover);
 }
 
 .topbar-action:focus-visible {
@@ -380,8 +389,8 @@ button {
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: #eee8ff;
-    color: #6338dc;
+    background: #FFEDD5;
+    color: #292524;
     font-size: 14px;
     font-weight: 700;
 }
@@ -501,8 +510,8 @@ button {
     align-items: center;
     gap: 18px;
     padding: 22px 25px;
-    background: linear-gradient(110deg, #eee8ff, #e5f7ff 58%, #e8fff5);
-    border: 1px solid #ded5ff;
+    background: linear-gradient(110deg, #FFEDD5, #F5F5F4 70%);
+    border: 1px solid #FDBA74;
     border-radius: 15px;
     margin-bottom: 45px;
 }
@@ -511,7 +520,7 @@ button {
     width: 48px;
     height: 48px;
     border-radius: 13px;
-    background: #7047eb;
+    background: var(--primary);
     color: #ffffff;
     display: grid;
     place-items: center;
@@ -533,7 +542,7 @@ button {
 }
 
 .storage-action {
-    color: #6338dc;
+    color: var(--primary-hover);
     font-size: 12px;
     font-weight: 700;
 }
@@ -587,8 +596,8 @@ button {
 
 .view-btn:hover,
 .view-btn.active {
-    background: #f0ebff;
-    color: #6338dc;
+    background: #FFEDD5;
+    color: var(--primary-hover);
 }
 
 
@@ -601,7 +610,7 @@ button {
     width: 100%;
     padding: 18px 0 12px;
     margin-top: 12px;
-    border-bottom: 1px solid var(--border-color, #e5e7eb);
+    border-bottom: 1px solid var(--border);
 }
 
 .date-heading:first-child {
@@ -616,7 +625,7 @@ button {
 
 .date-heading span {
     font-size: 12px;
-    color: var(--text-secondary, #888);
+    color: var(--muted);
 }
 
 .file-list {
@@ -698,7 +707,7 @@ button {
     width: 43px;
     height: 43px;
     flex-shrink: 0;
-    background: #f0efff;
+    background: #FFEDD5;
     border-radius: 11px;
     display: grid;
     place-items: center;
@@ -716,23 +725,23 @@ button {
 }
 
 .pdf-icon {
-    color: #d83f5c;
+    color: #292524;
 }
 
 .image-icon {
-    color: #2874d0;
+    color: var(--primary);
 }
 
 .zip-icon {
-    color: #a56a13;
+    color: #292524;
 }
 
 .doc-icon {
-    color: #2868c8;
+    color: var(--primary-hover);
 }
 
 .generic-icon {
-    color: #7047eb;
+    color: var(--primary);
 }
 
 .file-details {
@@ -794,19 +803,19 @@ button {
 }
 
 .view-action {
-    color: #7047eb;
+    color: var(--primary);
 }
 
 .view-action:hover {
-    background: #f0ebff;
+    background: #FFEDD5;
 }
 
 .download-action {
-    color: #7047eb;
+    color: var(--primary);
 }
 
 .download-action:hover {
-    background: #f0ebff;
+    background: #FFEDD5;
 }
 
 .delete-action {
@@ -814,14 +823,14 @@ button {
 }
 
 .delete-action:hover {
-    background: #fff0f3;
+    background: #FFEDD5;
 }
 
 
 /* EMPTY STATE */
 
 .empty-state {
-    border: 1px dashed #cbd0e4;
+    border: 1px dashed var(--border);
     border-radius: 15px;
     padding: 65px 20px;
     text-align: center;
@@ -835,7 +844,7 @@ button {
     display: grid;
     place-items: center;
     border-radius: 20px;
-    background: #eee8ff;
+    background: #FFEDD5;
     color: var(--primary);
     font-size: 35px;
 }
@@ -863,7 +872,7 @@ button {
     margin-top: 55px;
     padding-top: 20px;
     border-top: 1px solid var(--border);
-    color: #858aa3;
+    color: var(--muted);
     font-size: 10px;
 }
 

@@ -2,15 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --background: #f4f6ff;
-    --sidebar: #ffffff;
-    --surface: #ffffff;
-    --border: #e4e7f3;
-    --primary: #7047eb;
-    --primary-hover: #865ff5;
-    --text: #25243b;
-    --muted: #727792;
-    --danger: #e34f70;
+    --background: #D6D3D1;
+    --sidebar: #292524;
+    --surface: #F5F5F4;
+    --border: #A8A29E;
+    --primary: #EA580C;
+    --primary-hover: #C2410C;
+    --text: #292524;
+    --muted: #57534E;
+    --danger: #EA580C;
 }
 
 * {
@@ -55,6 +55,7 @@ a {
     font-size: 19px;
     font-weight: 800;
     letter-spacing: -0.6px;
+    color: #F5F5F4;
 }
 
 .brand-icon {
@@ -62,7 +63,7 @@ a {
     height: 38px;
     display: grid;
     place-items: center;
-    background: linear-gradient(135deg, #7047eb, #a149e8);
+    background: #EA580C;
     border-radius: 12px;
     color: white;
     font-size: 23px;
@@ -73,14 +74,14 @@ a {
 }
 
 .back-link {
-    color: var(--muted);
+    color: #D6D3D1;
     font-size: 12px;
     font-weight: 600;
     transition: 0.2s;
 }
 
 .back-link:hover {
-    color: var(--primary-hover);
+    color: #F5F5F4;
 }
 
 .back-link span {
@@ -136,7 +137,7 @@ a {
     border-radius: 18px;
     padding: 42px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(63, 54, 117, 0.12);
+    box-shadow: 0 20px 60px rgba(41, 37, 36, 0.12);
 }
 
 .upload-icon {
@@ -144,7 +145,7 @@ a {
     height: 65px;
     margin: 0 auto 22px;
     border-radius: 18px;
-    background: linear-gradient(135deg, #eee8ff, #ddf6ff);
+    background: #FFEDD5;
     color: var(--primary);
     display: grid;
     place-items: center;
@@ -176,7 +177,7 @@ a {
 
 .file-field label {
     display: block;
-    color: #545a74;
+    color: #292524;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 11px;
@@ -186,8 +187,8 @@ a {
     display: block;
     width: 100%;
     padding: 18px;
-    background: #f8f9ff;
-    border: 1px dashed #c9cde0;
+    background: #F5F5F4;
+    border: 1px dashed #A8A29E;
     border-radius: 12px;
     color: var(--muted);
     font-family: inherit;
@@ -198,12 +199,12 @@ a {
 
 .file-input-wrapper input[type="file"]:hover {
     border-color: var(--primary);
-    background: #f3efff;
+    background: #FFEDD5;
 }
 
 .file-input-wrapper input[type="file"]::file-selector-button {
-    background: #eee8ff;
-    color: #6338dc;
+    background: #FFEDD5;
+    color: #292524;
     border: none;
     padding: 10px 15px;
     border-radius: 7px;
@@ -229,7 +230,7 @@ a {
     min-height: 48px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(100deg, #7047eb, #934fe6);
+    background: #EA580C;
     color: white;
     font-family: inherit;
     font-size: 12px;
@@ -239,7 +240,7 @@ a {
 }
 
 .submit-button:hover {
-    background: linear-gradient(100deg, #6038d8, #803dd8);
+    background: #C2410C;
     transform: translateY(-1px);
 }
 
@@ -268,7 +269,7 @@ a {
 
 .page-footer {
     text-align: center;
-    color: #858aa3;
+    color: #57534E;
     font-size: 10px;
     margin-top: 35px;
 }
