@@ -30,6 +30,10 @@ class FileUploadTests(TestCase):
 
         self.assertContains(response, 'name="files"')
         self.assertContains(response, "multiple")
+        self.assertContains(response, 'href="/storage/upload/" class="nav-link active"')
+        self.assertContains(response, "Available storage")
+        self.assertContains(response, "About Personal Cloud")
+        self.assertContains(response, "Choose files to upload")
 
     def test_dashboard_loads_for_signed_in_user(self):
         response = self.client.get(reverse("home"))
