@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,101 +5,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Upload Files | Personal Cloud</title>
 
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}?v=6">
     <link rel="stylesheet" href="{% static 'storage/css/upload.css' %}">
 </head>
 
 <body>
-
-<div class="upload-page">
-
-    <header class="topbar">
+<div class="app-layout">
+    <aside class="sidebar">
         <a href="{% url 'home' %}" class="brand">
-            <span class="brand-icon">☁</span>
+            <div class="brand-icon">☁</div>
             <span>Personal<span class="brand-highlight">Cloud</span></span>
         </a>
 
-        <a href="{% url 'home' %}" class="back-link">
-            <span>←</span> Back to Dashboard
-        </a>
-    </header>
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="sidebar-nav">
+            <a href="{% url 'home' %}" class="nav-link">
+                <span>▦</span> My Files
+            </a>
+            <a href="{% url 'folders' %}" class="nav-link">
+                <span aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6.5h7l2 2H21v9.5H3z"/><path d="M3 8.5h18"/></svg></span> Folders
+            </a>
+            <a href="{% url 'upload_file' %}" class="nav-link active" aria-current="page">
+                <span>↑</span> Upload Files
+            </a>
+        </nav>
 
+        <section class="sidebar-storage" aria-label="Available storage">
+            <div class="sidebar-storage-heading">
+                <span class="sidebar-storage-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M4 6.5h16v11H4z"/>
+                        <path d="M4 10h16M8 14.5h.01M11 14.5h.01"/>
+                    </svg>
+                </span>
+                <span>Available storage</span>
+            </div>
+            <strong class="sidebar-storage-value">
+                {{ available_storage_bytes|filesizeformat }}
+            </strong>
+            <div class="sidebar-storage-meter"
+                 role="progressbar"
+                 aria-label="Device storage used"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-valuenow="{{ storage_used_percent }}">
+                <span class="sidebar-storage-meter-fill"
+                      style="width: {{ storage_used_percent }}%"></span>
+            </div>
+            <span class="sidebar-storage-caption">{{ storage_used_percent }}% used on this device</span>
+        </section>
 
-    <main class="upload-main">
-
-        <div class="page-heading">
-            <p class="eyebrow">YOUR PERSONAL SPACE</p>
-            <h1>Upload your files<span>.</span></h1>
-            <p>Select a file from your device and add it to your personal cloud.</p>
-        </div>
-
-
-        <section class="upload-card">
-
-            <div class="upload-icon">↑</div>
-
-            <h2>Choose files to upload</h2>
-
-            <p class="upload-description">
-                Select one or more files from your computer or mobile device.
-            </p>
-
-
-            <form method="POST"
-                  enctype="multipart/form-data"
-                  class="upload-form">
-
+        <div class="sidebar-bottom">
+            <div class="sidebar-label">ACCOUNT</div>
+            <div class="user-card">
+                <div class="avatar">
+                    {{ request.user.first_name|first|upper|default:"U" }}
+                </div>
+                <div class="user-info">
+                    <strong>{{ request.user.get_full_name|default:request.user.email }}</strong>
+                    <span>Personal account</span>
+                </div>
+            </div>
+            <form method="POST" action="{% url 'logout' %}">
                 {% csrf_token %}
+                <button type="submit" class="logout-button">
+                    <span>↪</span> Sign out
+                </button>
+            </form>
+        </div>
+    </aside>
 
-                {% if form.non_field_errors %}
-                    <div class="form-errors">
-                        {{ form.non_field_errors }}
+    <main class="main-content">
+        <header class="topbar">
+            <div class="topbar-right">
+                <div class="topbar-user">
+                    <div class="topbar-avatar" aria-hidden="true">
+                        {{ request.user.first_name|first|upper|default:"U" }}
                     </div>
-                {% endif %}
+                    <div class="topbar-user-info">
+                        <span class="topbar-user-name">
+                            {{ request.user.get_full_name|default:request.user.email }}
+                        </span>
+                        <span class="topbar-user-role">{{ request.user.email }}</span>
+                    </div>
+                </div>
+                <div class="topbar-divider" aria-hidden="true"></div>
+                <div class="topbar-actions">
+                    <button class="topbar-action"
+                            type="button"
+                            aria-label="About Personal Cloud"
+                            title="About">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M9.6 9a2.4 2.4 0 1 1 4.1 1.7c-.8.8-1.7 1-1.7 2.3"/>
+                            <path d="M12 16.5h.01"/>
+                        </svg>
+                    </button>
+                    <button class="topbar-action"
+                            type="button"
+                            aria-label="Settings"
+                            title="Settings">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 3.25v2.1M12 18.65v2.1M20.75 12h-2.1M5.35 12h-2.1M18.19 5.81l-1.49 1.49M7.3 16.7l-1.49 1.49M18.19 18.19 16.7 16.7M7.3 7.3 5.81 5.81"/>
+                            <circle cx="12" cy="12" r="6.1"/>
+                            <circle cx="12" cy="12" r="2.15"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
 
-                {% for field in form %}
-                    <div class="file-field">
+        <section class="page-content upload-content">
+            <div class="upload-main">
+                <div class="page-heading">
+                    <p class="eyebrow">YOUR PERSONAL SPACE</p>
+                    <h1>Upload your files<span>.</span></h1>
+                    <p>Select a file from your device and add it to your personal cloud.</p>
+                </div>
 
-                        <label for="{{ field.id_for_label }}">
-                            {{ field.label }}
-                        </label>
+                <section class="upload-card">
+                    <div class="upload-icon">↑</div>
+                    <h2>Choose files to upload</h2>
+                    <p class="upload-description">
+                        Select one or more files from your computer or mobile device.
+                    </p>
 
-                        <div class="file-input-wrapper">
-                            {{ field }}
-                        </div>
+                    <form method="POST"
+                          enctype="multipart/form-data"
+                          class="upload-form">
+                        {% csrf_token %}
 
-                        {% if field.errors %}
-                            <div class="field-errors">
-                                {{ field.errors }}
+                        {% if form.non_field_errors %}
+                            <div class="form-errors">
+                                {{ form.non_field_errors }}
                             </div>
                         {% endif %}
 
+                        {% for field in form %}
+                            <div class="file-field">
+                                <label for="{{ field.id_for_label }}">
+                                    {{ field.label }}
+                                </label>
+                                <div class="file-input-wrapper">
+                                    {{ field }}
+                                </div>
+                                {% if field.errors %}
+                                    <div class="field-errors">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <button type="submit" class="submit-button">
+                            <span>↑</span> Upload files to Personal Cloud
+                        </button>
+                    </form>
+
+                    <div class="upload-note">
+                        <span>🔒</span>
+                        Your files are associated with your personal account.
                     </div>
-                {% endfor %}
+                </section>
 
-                <button type="submit" class="submit-button">
-                    <span>↑</span> Upload files to Personal Cloud
-                </button>
-
-            </form>
-
-            <div class="upload-note">
-                <span>🔒</span>
-                Your files are associated with your personal account.
+                <footer class="page-footer">
+                    Personal Cloud · Your files. Your space. Your control.
+                </footer>
             </div>
-
         </section>
-
-
-        <footer class="page-footer">
-            Personal Cloud · Your files. Your space. Your control.
-        </footer>
-
     </main>
-
 </div>
-
 </body>
 </html>

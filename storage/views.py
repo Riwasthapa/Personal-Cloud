@@ -1,6 +1,8 @@
 
 from pathlib import Path
 from datetime import datetime
+import shutil
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse, Http404
@@ -33,6 +35,20 @@ def get_cloud_files():
     return files
 
 
+def _upload_context(form):
+    storage_dir = Path(settings.ANDROID_MEDIA_ROOT)
+    storage_dir.mkdir(parents=True, exist_ok=True)
+    usage = shutil.disk_usage(storage_dir)
+
+    return {
+        "form": form,
+        "available_storage_bytes": usage.free,
+        "storage_used_percent": (
+            round(usage.used / usage.total * 100) if usage.total else 0
+        ),
+    }
+
+
 @login_required
 def upload_file(request):
     if request.method == "POST":
@@ -52,7 +68,11 @@ def upload_file(request):
                 destination.exists() for _, destination in uploads
             ):
                 form.add_error("files", "A file with that name already exists.")
-                return render(request, "storage/upload.html", {"form": form})
+                return render(
+                    request,
+                    "storage/upload.html",
+                    _upload_context(form),
+                )
 
             for uploaded, destination in uploads:
                 with destination.open("xb") as output:
@@ -64,7 +84,11 @@ def upload_file(request):
     else:
         form = FileUploadForm()
 
-    return render(request, "storage/upload.html", {"form": form})
+    return render(
+        request,
+        "storage/upload.html",
+        _upload_context(form),
+    )
 
 
 @login_required

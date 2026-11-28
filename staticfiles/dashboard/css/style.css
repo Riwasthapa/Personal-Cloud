@@ -6,19 +6,16 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --background: #D6D3D1;
-    --sidebar: #292524;
-    --surface: #F5F5F4;
-    --surface-hover: #E7E5E4;
-    --border: #A8A29E;
-    --primary: #EA580C;
-    --primary-hover: #C2410C;
-    --text: #292524;
-    --muted: #57534E;
-    --danger: #EA580C;
-    --sidebar-text: #F5F5F4;
-    --sidebar-muted: #D6D3D1;
-    --sidebar-border: rgba(214, 211, 209, 0.2);
+    --background: #f4f6ff;
+    --sidebar: #ffffff;
+    --surface: #ffffff;
+    --surface-hover: #f6f4ff;
+    --border: #e4e7f3;
+    --primary: #7047eb;
+    --primary-hover: #865ff5;
+    --text: #25243b;
+    --muted: #727792;
+    --danger: #e34f70;
 }
 
 * {
@@ -64,7 +61,7 @@ button {
     height: 100vh;
     overflow-y: auto;
     background: var(--sidebar);
-    border-right: 1px solid var(--sidebar-border);
+    border-right: 1px solid var(--border);
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -78,10 +75,6 @@ button {
     font-weight: 800;
     margin-bottom: 55px;
     letter-spacing: -0.6px;
-}
-
-.sidebar .brand {
-    color: var(--sidebar-text);
 }
 
 .brand-icon {
@@ -100,7 +93,7 @@ button {
 }
 
 .sidebar-label {
-    color: var(--sidebar-muted);
+    color: #858aa3;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -119,7 +112,7 @@ button {
     gap: 13px;
     padding: 13px 14px;
     border-radius: 10px;
-    color: var(--sidebar-muted);
+    color: var(--muted);
     font-size: 13px;
     font-weight: 600;
     transition: 0.2s;
@@ -131,8 +124,8 @@ button {
 
 .nav-link:hover,
 .nav-link.active {
-    background: var(--primary);
-    color: var(--sidebar-text);
+    background: #f0ebff;
+    color: #6338dc;
 }
 
 .sidebar-storage {
@@ -140,15 +133,14 @@ button {
     padding: 16px 14px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: rgba(214, 211, 209, 0.06);
-    border-color: var(--sidebar-border);
+    background: linear-gradient(135deg, #f8f6ff, #f3fbff);
 }
 
 .sidebar-storage-heading {
     display: flex;
     align-items: center;
     gap: 9px;
-    color: var(--sidebar-muted);
+    color: var(--muted);
     font-size: 11px;
     font-weight: 600;
 }
@@ -159,8 +151,8 @@ button {
     display: grid;
     place-items: center;
     border-radius: 8px;
-    background: rgba(234, 88, 12, 0.2);
-    color: #FDBA74;
+    background: #eee8ff;
+    color: var(--primary);
 }
 
 .sidebar-storage-icon svg {
@@ -175,7 +167,7 @@ button {
 .sidebar-storage-value {
     display: block;
     margin: 12px 0 10px;
-    color: var(--sidebar-text);
+    color: var(--text);
     font-size: 20px;
     font-weight: 800;
     letter-spacing: -0.5px;
@@ -186,19 +178,19 @@ button {
     margin-bottom: 7px;
     overflow: hidden;
     border-radius: 999px;
-    background: rgba(214, 211, 209, 0.2);
+    background: #e7e5f1;
 }
 
 .sidebar-storage-meter-fill {
     display: block;
     height: 100%;
     border-radius: inherit;
-    background: var(--primary);
+    background: linear-gradient(90deg, var(--primary), #9b7aff);
     transition: width 0.3s ease;
 }
 
 .sidebar-storage-caption {
-    color: var(--sidebar-muted);
+    color: var(--muted);
     font-size: 10px;
 }
 
@@ -212,7 +204,7 @@ button {
     align-items: center;
     gap: 11px;
     padding: 13px 8px;
-    border-top: 1px solid var(--sidebar-border);
+    border-top: 1px solid var(--border);
     margin-top: 8px;
 }
 
@@ -222,8 +214,8 @@ button {
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: rgba(234, 88, 12, 0.2);
-    color: #FDBA74;
+    background: #eee8ff;
+    color: #6338dc;
     font-weight: 700;
 }
 
@@ -238,12 +230,11 @@ button {
     font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--sidebar-text);
 }
 
 .user-info span {
     font-size: 10px;
-    color: var(--sidebar-muted);
+    color: var(--muted);
 }
 
 .logout-button {
@@ -252,7 +243,7 @@ button {
     border: none;
     background: transparent;
     text-align: left;
-    color: var(--sidebar-muted);
+    color: var(--muted);
     border-radius: 9px;
     font-size: 13px;
     transition: 0.2s;
@@ -263,7 +254,7 @@ button {
 }
 
 .logout-button:hover {
-    background: rgba(234, 88, 12, 0.15);
+    background: #fff0f3;
     color: var(--danger);
 }
 
@@ -308,7 +299,7 @@ button {
 }
 
 .breadcrumb-separator {
-    color: var(--muted);
+    color: #b7bbcc;
     font-size: 13px;
 }
 
@@ -351,8 +342,8 @@ button {
 
 .topbar-action:hover {
     border-color: var(--border);
-    background: #FFEDD5;
-    color: var(--primary-hover);
+    background: #f0ebff;
+    color: #6338dc;
 }
 
 .topbar-action:focus-visible {
@@ -389,8 +380,8 @@ button {
     display: grid;
     place-items: center;
     border-radius: 50%;
-    background: #FFEDD5;
-    color: #292524;
+    background: #eee8ff;
+    color: #6338dc;
     font-size: 14px;
     font-weight: 700;
 }
@@ -510,8 +501,8 @@ button {
     align-items: center;
     gap: 18px;
     padding: 22px 25px;
-    background: linear-gradient(110deg, #FFEDD5, #F5F5F4 70%);
-    border: 1px solid #FDBA74;
+    background: linear-gradient(110deg, #eee8ff, #e5f7ff 58%, #e8fff5);
+    border: 1px solid #ded5ff;
     border-radius: 15px;
     margin-bottom: 45px;
 }
@@ -520,7 +511,7 @@ button {
     width: 48px;
     height: 48px;
     border-radius: 13px;
-    background: var(--primary);
+    background: #7047eb;
     color: #ffffff;
     display: grid;
     place-items: center;
@@ -542,7 +533,7 @@ button {
 }
 
 .storage-action {
-    color: var(--primary-hover);
+    color: #6338dc;
     font-size: 12px;
     font-weight: 700;
 }
@@ -596,8 +587,8 @@ button {
 
 .view-btn:hover,
 .view-btn.active {
-    background: #FFEDD5;
-    color: var(--primary-hover);
+    background: #f0ebff;
+    color: #6338dc;
 }
 
 
@@ -610,7 +601,7 @@ button {
     width: 100%;
     padding: 18px 0 12px;
     margin-top: 12px;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-color, #e5e7eb);
 }
 
 .date-heading:first-child {
@@ -625,7 +616,7 @@ button {
 
 .date-heading span {
     font-size: 12px;
-    color: var(--muted);
+    color: var(--text-secondary, #888);
 }
 
 .file-list {
@@ -707,7 +698,7 @@ button {
     width: 43px;
     height: 43px;
     flex-shrink: 0;
-    background: #FFEDD5;
+    background: #f0efff;
     border-radius: 11px;
     display: grid;
     place-items: center;
@@ -725,23 +716,23 @@ button {
 }
 
 .pdf-icon {
-    color: #292524;
+    color: #d83f5c;
 }
 
 .image-icon {
-    color: var(--primary);
+    color: #2874d0;
 }
 
 .zip-icon {
-    color: #292524;
+    color: #a56a13;
 }
 
 .doc-icon {
-    color: var(--primary-hover);
+    color: #2868c8;
 }
 
 .generic-icon {
-    color: var(--primary);
+    color: #7047eb;
 }
 
 .file-details {
@@ -803,19 +794,19 @@ button {
 }
 
 .view-action {
-    color: var(--primary);
+    color: #7047eb;
 }
 
 .view-action:hover {
-    background: #FFEDD5;
+    background: #f0ebff;
 }
 
 .download-action {
-    color: var(--primary);
+    color: #7047eb;
 }
 
 .download-action:hover {
-    background: #FFEDD5;
+    background: #f0ebff;
 }
 
 .delete-action {
@@ -823,14 +814,14 @@ button {
 }
 
 .delete-action:hover {
-    background: #FFEDD5;
+    background: #fff0f3;
 }
 
 
 /* EMPTY STATE */
 
 .empty-state {
-    border: 1px dashed var(--border);
+    border: 1px dashed #cbd0e4;
     border-radius: 15px;
     padding: 65px 20px;
     text-align: center;
@@ -844,7 +835,7 @@ button {
     display: grid;
     place-items: center;
     border-radius: 20px;
-    background: #FFEDD5;
+    background: #eee8ff;
     color: var(--primary);
     font-size: 35px;
 }
@@ -872,7 +863,7 @@ button {
     margin-top: 55px;
     padding-top: 20px;
     border-top: 1px solid var(--border);
-    color: var(--muted);
+    color: #858aa3;
     font-size: 10px;
 }
 
